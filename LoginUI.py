@@ -1,33 +1,64 @@
 from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
+from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
+from kivy.config import Config
 
 
 
-class LoginUI(GridLayout):
 
-    def __init__(self, **kwargs):
-        super(LoginUI,self).__init__(**kwargs)
-       
-        self.cols = 2
-        self.add_widget(Label(text='User Name',size_hint= (None, None),height= 15))
-        self.username = TextInput(multiline=False,size_hint= (None, None),height= 15)
-        self.add_widget(self.username)
-        self.add_widget(Label(text='Password',size_hint= (None, None),height= 15))
-        self.password = TextInput(password=True, multiline=False,size_hint= (None, None),height= 15)
-        self.add_widget(self.password)
+Config.set('graphics','resizable',True)
 
-class MyApp(App):
+
+
+
+
+class LoginUI(App):
 
     def build(self):
-        return LoginUI()
 
 
+        Layout = RelativeLayout()
+
+
+        Layout.add_widget(Label(text='Username',
+                                size_hint=(.2,.06),
+                                pos_hint={'center_x':.32,'center_y':.55}))
+        username = TextInput(multiline=False,
+                           size_hint=(.2,.06),
+                           font_size=16,
+                           pos_hint={'center_x':.6,'center_y':.55})
+        Layout.add_widget(username)
+
+
+        Layout.add_widget(Label(text='Password',
+                                size_hint=(.2,.06),
+                                pos_hint={'center_x':.32,'center_y':.4}))
+        password = TextInput(password=True,multiline=False,
+                             size_hint=(.2,.06),
+                             font_size=16,
+                             pos_hint={'center_x':.6,'center_y':.4})
+        Layout.add_widget(password)
+        
+
+
+        
+
+
+        Layout.add_widget(Button(text='Login',
+                                 size_hint=(.2,.06),
+                                 pos_hint={'center_x':.5,'center_y':.3}))
+        return Layout
 
 if __name__=='__main__':
-
-    MyApp().run()
+    LoginUI().run()
 
     
+
+
+
         
+
+
+
